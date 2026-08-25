@@ -140,53 +140,45 @@
             <div class="relative z-10 flex flex-col items-center">
                 <i class="ph ph-circle-notch text-5xl text-brand-blue animate-spin mb-4"></i>
                 <h3 class="text-lg font-black text-slate-800">Sinkronisasi Database</h3>
-                <p class="text-sm font-semibold text-slate-500 mt-1">Mengambil data aturan dan kasus dari Server...</p>
+                <p class="text-sm font-semibold text-slate-500 mt-1">Mengambil data aturan dan kasus dari Server API...</p>
             </div>
         </div>
     </div>
 
-    <!-- LOGIN SCREEN -->
+    <!-- LOGIN SCREEN (Centered Card API Version) -->
     <div id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#1e3a8a] transition-opacity duration-700" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.07) 1px, transparent 0); background-size: 24px 24px;">
-        <!-- Centered Card -->
-        <div id="login-form-container" class="w-full max-w-[400px] mx-4 bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col transform transition-transform">
+        <div id="login-form-container" class="w-full max-w-[420px] mx-4 bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col transform transition-transform">
             
-            <!-- Top Section (Blue Gradient matching Sidebar) -->
             <div class="bg-gradient-to-b from-[#3a4eb5] to-[#1e3a8a] pt-10 pb-8 flex flex-col items-center text-center relative">
-                <!-- Lingkaran Logo -->
                 <div class="relative w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-md mb-4 p-1 z-10">
                     <img src="https://i.ibb.co.com/TxnhtcFT/favicon.png" alt="Al-Wildan Logo" class="w-full h-full object-contain rounded-full">
                 </div>
-                <h1 class="text-2xl font-black text-white tracking-wide relative z-10">Case Portal</h1>
-                <p class="text-blue-200 text-xs mt-1 font-medium tracking-wide relative z-10 uppercase tracking-[0.1em]">Al-Wildan Islamic</p>
+                <h1 class="text-3xl font-black text-white tracking-wide relative z-10">Case Portal</h1>
+                <p class="text-blue-200 text-xs mt-1.5 font-bold tracking-wide relative z-10 uppercase tracking-[0.1em]">Al-Wildan Islamic</p>
             </div>
 
-            <!-- Bottom Section (White Form) -->
-            <div class="p-8 pb-10 space-y-5 bg-white">
-                <!-- Username -->
+            <div class="p-8 pb-10 space-y-6 bg-white">
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1.5">Nama Lengkap / Username</label>
+                    <label class="block text-xs font-bold text-slate-600 mb-2">Nama Lengkap / Username</label>
                     <div class="relative group">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-blue transition-colors"><i class="ph ph-user-circle text-xl"></i></span>
-                        <input type="text" id="login-username" placeholder="Ketik username..." class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-blue-500/10 transition-all font-semibold text-slate-700 placeholder-slate-400">
+                        <input type="text" id="login-username" placeholder="Ketik nama lengkap..." class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-blue-500/10 transition-all font-bold text-slate-700 placeholder-slate-400">
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 mb-1.5">Password</label>
+                    <label class="block text-xs font-bold text-slate-600 mb-2">Password</label>
                     <div class="relative group">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-blue transition-colors"><i class="ph ph-lock-key text-xl"></i></span>
                         <input type="password" id="login-password" placeholder="••••••••" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-brand-blue focus:ring-2 focus:ring-blue-500/10 transition-all font-black tracking-[0.2em] text-slate-700 placeholder-slate-400" onkeyup="if(event.key === 'Enter') attemptLogin()">
                     </div>
                 </div>
 
-                <!-- Error Msg -->
                 <div class="h-5 flex items-center">
                     <p id="login-error" class="text-red-500 text-xs font-bold opacity-0 transition-opacity flex items-center gap-1.5"><i class="ph ph-warning-circle text-base"></i> Kredensial tidak valid!</p>
                 </div>
 
-                <!-- Button -->
-                <button id="btn-login" onclick="attemptLogin()" class="w-full py-3.5 mt-2 bg-amber-400 hover:bg-amber-500 text-brand-blue rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
+                <button id="btn-login" onclick="attemptLogin()" class="w-full py-4 bg-amber-400 hover:bg-amber-500 text-brand-blue rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed">
                     Masuk Portal <i class="ph ph-sign-in text-lg"></i>
                 </button>
             </div>
@@ -254,7 +246,7 @@
             <div class="flex items-center gap-4">
                 <div class="bg-white/50 border border-white px-4 py-2 rounded-full flex items-center gap-2 shadow-sm backdrop-blur-md">
                     <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                    <span class="text-xs font-bold text-slate-600">Sistem Online (Live DB)</span>
+                    <span class="text-xs font-bold text-slate-600">Sistem Online (Live API)</span>
                 </div>
             </div>
         </header>
@@ -647,7 +639,7 @@
 
                         <div id="mod-bukti-container" class="hidden border border-slate-100 rounded-2xl p-5 text-center">
                             <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 border-b border-slate-100 pb-1 flex items-center justify-center gap-1"><i class="ph ph-camera"></i> Foto Bukti Laporan</p>
-                            <!-- Image URL from Google Drive will load here -->
+                            <!-- Image URL from Google Drive will load here with crossorigin -->
                             <img id="mod-bukti-img" src="" alt="Bukti" crossorigin="anonymous" class="max-w-full rounded-lg border border-slate-200 inline-block">
                         </div>
                     </div>
@@ -791,52 +783,28 @@
         let currentEditingId = null;
         let currentBase64ImageUpload = "";
 
-        // ==============================================================================
-        // MOCK ENVIRONMENT CHECK
-        // Ini memastikan tombol "Preview" di chat editor tidak error (ReferenceError).
-        // Kalau dijalankan asli di Google Apps Script, fungsi mock ini tidak akan dipakai.
-        // ==============================================================================
-        if (typeof google === 'undefined') {
-            console.warn("Mendeteksi lingkungan Preview. Menjalankan fungsi Mock Server.");
-            window.google = {
-                script: {
-                    run: {
-                        withSuccessHandler: function(callback) { this.successCallback = callback; return this; },
-                        withFailureHandler: function(callback) { this.failureCallback = callback; return this; },
-                        checkLogin: function(u, p) {
-                            setTimeout(() => {
-                                if(u==='admin' && p==='12345') this.successCallback({success: true, role: 'Admin (Preview)'});
-                                else this.successCallback({success: false, message: 'Kredensial salah. Coba: admin/12345'});
-                            }, 800);
-                        },
-                        getInitialData: function() {
-                            setTimeout(() => {
-                                this.successCallback({
-                                    masterPelanggaran: [
-                                        {no:1, kategori:'Ringan', desc:'Terlambat masuk kelas', konsekuensi:'Peringatan Lisan'},
-                                        {no:16, kategori:'Sedang', desc:'Keluar lingkungan Sekolah tanpa izin', konsekuensi:'Pembinaan / SP1'},
-                                        {no:29, kategori:'Berat', desc:'Berpacaran', konsekuensi:'Pembinaan / SP2'}
-                                    ],
-                                    dataKasus: []
-                                });
-                            }, 1000);
-                        },
-                        simpanKasusBaru: function(data) {
-                            setTimeout(() => {
-                                this.successCallback({success: true, fileUrl: data.lampiranImage, message: 'Berhasil tersimpan di (Mock) Server'});
-                            }, 1200);
-                        },
-                        updateKasusBK: function(data) {
-                            setTimeout(() => {
-                                this.successCallback({success: true, message: 'Progress disimpan di (Mock) Server'});
-                            }, 800);
-                        }
-                    }
-                }
-            };
+        // ============================================================================
+        // API CONFIGURATION (GANTI DENGAN URL WEB APP KAMU)
+        // ============================================================================
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwo9EyEWDTndod2E_E7GT1BH_IYBDPKp25j60hRgpuUtr0l0r_wh3EbEh4ZW5FWN-Jo/exec';
+
+        /**
+         * Helper Function untuk mengirim request Fetch ke API Google Apps Script.
+         * Menggunakan POST dengan body JSON string. GAS otomatis memproses Content-Type text/plain tanpa isu CORS.
+         */
+        async function fetchAPI(payload) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                return await response.json();
+            } catch (error) {
+                console.error("API Error:", error);
+                throw error;
+            }
         }
 
-        // LOGIN VIA GOOGLE APPS SCRIPT
         function attemptLogin() {
             const user = document.getElementById('login-username');
             const pass = document.getElementById('login-password');
@@ -850,8 +818,9 @@
             errorMsg.classList.add('opacity-0');
             user.classList.remove('border-red-400'); pass.classList.remove('border-red-400');
 
-            google.script.run
-                .withSuccessHandler((response) => {
+            // Mengirim request login ke Backend API
+            fetchAPI({ action: 'checkLogin', username: user.value, password: pass.value })
+                .then((response) => {
                     btn.innerHTML = 'Masuk Portal <i class="ph ph-sign-in text-lg"></i>';
                     btn.disabled = false;
                     
@@ -867,7 +836,7 @@
                             document.getElementById('main-nav').classList.remove('pointer-events-none', 'opacity-50');
                             
                             document.getElementById('data-loader').classList.remove('hidden');
-                            fetchInitialDatabase();
+                            fetchInitialDatabase(); // Tarik data setelah login
                             
                             showToast("Akses Diterima", "Selamat datang di sistem kedisiplinan.");
                         }, 500); 
@@ -880,18 +849,16 @@
                         setTimeout(() => document.getElementById('login-form-container').style.animation = '', 400);
                     }
                 })
-                .withFailureHandler((error) => {
+                .catch((error) => {
                     btn.innerHTML = 'Masuk Portal <i class="ph ph-sign-in text-lg"></i>';
                     btn.disabled = false;
-                    alert("Gagal koneksi ke server GAS. Refresh halaman.");
-                })
-                .checkLogin(user.value, pass.value);
+                    alert("Gagal koneksi ke server API. Pastikan internet aktif dan URL API benar.");
+                });
         }
 
-        // FETCH DATA
         function fetchInitialDatabase() {
-            google.script.run
-                .withSuccessHandler((result) => {
+            fetchAPI({ action: 'getInitialData' })
+                .then((result) => {
                     masterPelanggaran = result.masterPelanggaran;
                     dataKasus = result.dataKasus;
                     
@@ -901,14 +868,12 @@
                     updateBadge();
                     updateDropdownPelanggaran(); 
                 })
-                .withFailureHandler((error) => {
+                .catch((error) => {
                     alert("Gagal memuat database: " + error);
                     document.getElementById('data-loader').classList.add('hidden');
-                })
-                .getInitialData();
+                });
         }
 
-        // NAVIGATION
         function switchTab(tabId) {
             document.querySelectorAll('.tab-pane').forEach(el => { el.classList.add('hidden'); el.classList.remove('animate-fade-in'); });
             const targetPane = document.getElementById('pane-' + tabId);
@@ -1073,10 +1038,10 @@
             const btnSave = document.getElementById('btn-save');
             const btnSavePdf = document.getElementById('btn-save-pdf');
             btnSave.disabled = true; btnSavePdf.disabled = true;
-            btnSave.innerText = "Menyimpan File & Kasus...";
+            btnSave.innerText = "Mengirim Data...";
 
-            google.script.run
-                .withSuccessHandler((res) => {
+            fetchAPI({ action: 'simpanKasusBaru', data: newData })
+                .then((res) => {
                     btnSave.disabled = false; btnSavePdf.disabled = false;
                     btnSave.innerText = "Simpan (Antrean BK)";
                     
@@ -1101,12 +1066,11 @@
                         showToast("Gagal Disimpan", res.message);
                     }
                 })
-                .withFailureHandler((err) => {
+                .catch((err) => {
                     btnSave.disabled = false; btnSavePdf.disabled = false;
                     btnSave.innerText = "Simpan (Antrean BK)";
                     alert("Gagal koneksi ke server saat menyimpan.");
-                })
-                .simpanKasusBaru(newData);
+                });
         }
 
         function renderProsesKasus() {
@@ -1203,8 +1167,8 @@
             btnSave.disabled = true; btnPdf.disabled = true;
             btnSave.innerText = "Menyimpan...";
 
-            google.script.run
-                .withSuccessHandler((res) => {
+            fetchAPI({ action: 'updateKasusBK', dataUpdate: dataUpdate })
+                .then((res) => {
                     btnSave.disabled = false; btnPdf.disabled = false;
                     btnSave.innerText = "Simpan Progress";
                     
@@ -1220,12 +1184,11 @@
                         showToast("Gagal Menyimpan", res.message);
                     }
                 })
-                .withFailureHandler((err) => {
+                .catch((err) => {
                     btnSave.disabled = false; btnPdf.disabled = false;
                     btnSave.innerText = "Simpan Progress";
                     alert("Gagal koneksi server saat update.");
-                })
-                .updateKasusBK(dataUpdate);
+                });
         }
 
         function exportBAPFromModal() {
@@ -1243,8 +1206,8 @@
             btnPdf.innerHTML = '<i class="ph ph-spinner-gap animate-spin"></i> Menyimpan...';
             btnPdf.disabled = true;
 
-            google.script.run
-                .withSuccessHandler((res) => {
+            fetchAPI({ action: 'updateKasusBK', dataUpdate: dataUpdate })
+                .then((res) => {
                     btnPdf.innerHTML = '<i class="ph ph-file-pdf text-xl"></i> Simpan & Cetak BAP';
                     btnPdf.disabled = false;
                     
@@ -1255,8 +1218,7 @@
                         closeModal(); renderProsesKasus(); updateBadge();
                     }
                 })
-                .withFailureHandler((err)=>{ btnPdf.disabled=false; alert("Gagal koneksi"); })
-                .updateKasusBK(dataUpdate);
+                .catch((err)=>{ btnPdf.disabled=false; alert("Gagal koneksi"); });
         }
 
         function processBAP(data) {
@@ -1403,7 +1365,6 @@
             if(kat === 'Sangat Berat') return '<span class="px-2 py-1 text-[10px] font-black rounded bg-red-50 text-red-600 border border-red-200 uppercase tracking-widest">MALAPETAKA</span>';
             return `<span class="px-2 py-1 text-[10px] font-black rounded bg-slate-100 text-slate-700">${kat}</span>`;
         }
-
     </script>
 </body>
 </html>
