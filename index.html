@@ -96,11 +96,15 @@
             font-family: 'Times New Roman', Times, serif; 
             color: black; 
             box-sizing: border-box;
-            font-size: 12pt;
+            font-size: 11pt;
             line-height: 1.5;
         }
         .bap-image-container { text-align: center; margin-top: 20px; }
         .bap-image-container img { max-width: 100%; max-height: 120mm; object-fit: contain; border: 1px solid #ddd; padding: 5px; }
+        
+        .bap-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; }
+        .bap-table th, .bap-table td { border: 1px solid black; padding: 8px; vertical-align: top; }
+        .bap-table th { text-align: center; font-weight: bold; background-color: #f2f2f2; }
 
         input[type="file"]::file-selector-button {
             border: none;
@@ -684,64 +688,76 @@
     <div class="hidden">
         <div id="bap-template">
             <!-- HEADER BAP -->
-            <div style="border-bottom: 3px solid black; padding-bottom: 10px; margin-bottom: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 20px;">
-                <img src="https://i.ibb.co.com/TxnhtcFT/favicon.png" alt="Logo" crossorigin="anonymous" style="width: 80px; height: 80px; object-fit: contain;">
-                <div>
-                    <h1 style="font-size: 18pt; font-weight: bold; margin: 0; text-transform: uppercase;">AL-WILDAN ISLAMIC SCHOOL</h1>
-                    <p style="font-size: 11pt; margin: 5px 0 0 0;">Divisi Kedisiplinan dan Bimbingan Konseling (GnC)</p>
-                </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://i.ibb.co.com/TxnhtcFT/favicon.png" alt="Logo Al-Wildan" crossorigin="anonymous" style="width: 100px; height: 100px; object-fit: contain; margin-bottom: 10px;">
+                <h1 style="font-size: 16pt; font-weight: bold; margin: 0; text-transform: uppercase;">AL-WILDAN ISLAMIC SCHOOL</h1>
+                <p style="font-size: 11pt; margin: 5px 0 0 0;">Divisi Kedisiplinan dan Bimbingan Konseling (GnC)</p>
+                <hr style="border: 1px solid black; margin-top: 15px; margin-bottom: 2px;">
+                <hr style="border: 2px solid black; margin-top: 0;">
             </div>
             
-            <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 5px;">BERITA ACARA PEMERIKSAAN KASUS</h2>
-            <p style="text-align: center; margin-top:0; font-size: 11pt; margin-bottom: 30px;" id="bap-doc-id">Nomor: BAP/--/2026</p>
+            <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 5px;">BERITA ACARA PEMERIKSAAN (BAP)</h2>
+            <h2 style="font-size: 12pt; font-weight: bold; text-align: center; margin-bottom: 5px;">KRONOLOGI KEJADIAN PELAPORAN</h2>
+            <p style="text-align: center; margin-top:0; font-size: 11pt; margin-bottom: 30px; font-weight: bold;">(NAMA) SISWA KELAS SD/ SMP/ SMA AL-WILDAN ISLAMIC SCHOOL (.....)<br>PADA TANGGAL <span id="bap-tgl-cetak">--</span></p>
 
             <!-- KONTEN MENGALIR OTOMATIS -->
-            <p>Pada hari ini, tanggal <strong id="bap-tgl-cetak">--</strong>, telah dilakukan pemeriksaan dan klarifikasi terhadap siswa/i berikut:</p>
-            <table style="width: 100%; margin-top: 15px; margin-bottom: 20px;">
-                <tr><td style="width: 30%; padding: 5px 0;">Nama Lengkap</td><td style="width: 5%;">:</td><td><strong id="bap-nama">--</strong></td></tr>
-                <tr><td style="padding: 5px 0;">Kelas / Jenjang</td><td>:</td><td><span id="bap-kelas">--</span></td></tr>
-                <tr><td style="padding: 5px 0;">Tanggal Kejadian</td><td>:</td><td><span id="bap-tgl-kejadian">--</span></td></tr>
-                <tr><td style="padding: 5px 0;">Pelapor Awal</td><td>:</td><td><span id="bap-pelapor">--</span></td></tr>
+            <p style="font-weight: bold; text-decoration: underline;">Pendahuluan:</p>
+            <p style="text-align: justify; margin-top: 5px; text-indent: 30px;">
+                Perilaku spesifik ananda yang terkait dengan laporan pelanggaran ananda <strong id="bap-nama">--</strong> kelas <strong id="bap-kelas">--</strong>. Pendalaman dilakukan oleh <strong id="bap-pelapor">--</strong> untuk mendapatkan dan mengumpulkan keterangan-keterangan baik dari pelaku maupun saksi yang saat itu berada atau melihat kejadian.
+            </p>
+            
+            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Paparan Kronologi:</p>
+            <table class="bap-table">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">No</th>
+                        <th style="width: 25%;">Tanggal</th>
+                        <th style="width: 40%;">Kronologis</th>
+                        <th style="width: 30%;">Dokumentasi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">1</td>
+                        <td id="bap-tgl-kejadian">--</td>
+                        <td style="text-align: justify; white-space: pre-wrap;" id="bap-kronologi-detail">--</td>
+                        <td style="text-align: center; vertical-align: middle;">
+                            <img id="bap-foto-img-inline" src="" crossorigin="anonymous" style="max-width: 100%; max-height: 150px; display: none;">
+                            <span id="bap-no-foto-inline" style="font-style: italic; color: #777;">(Tidak ada lampiran foto)</span>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
 
-            <p style="font-weight: bold; text-decoration: underline;">Rincian Pelanggaran:</p>
+            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Rincian Kategori Pelanggaran:</p>
             <p style="margin-top: 5px;">Kategori: <strong id="bap-kategori">--</strong></p>
             <p style="margin-top: 5px; font-weight: bold;" id="bap-jenis">--</p>
             <p style="margin-top: 5px; font-style: italic; border-left: 2px solid black; padding-left: 10px;" id="bap-deskripsi">--</p>
 
-            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Hasil Investigasi / Kronologi Lengkap:</p>
-            <div style="border: 1px solid #ccc; padding: 15px; min-height: 100px; white-space: pre-wrap; background: #f9f9f9; text-align: justify; margin-top: 5px;" id="bap-kronologi-detail">--</div>
+            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">KESIMPULAN:</p>
+            <p style="text-align: justify; margin-top: 5px;">
+                Memperhatikan dan menindaklanjuti kejadian tersebut, didasarkan pendalaman yang telah dilakukan, disimpulkan bahwa ananda telah melanggar Tata Tertib sebagai pelajar AL-WILDAN ISLAMIC SCHOOL. Adapun komitmen dan penyelesaiannya adalah sebagai berikut:
+            </p>
+            <div style="border: 1px solid black; padding: 10px; min-height: 60px; margin-top: 10px; font-style: italic;" id="bap-solusi">--</div>
 
-            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Penyelesaian / Komitmen (Sanksi):</p>
-            <p style="margin-top: 5px; min-height: 60px; border: 1px solid #ccc; padding: 10px;" id="bap-solusi">--</p>
-
-            <p style="margin-top: 20px;">Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk digunakan sebagaimana mestinya sesuai dengan panduan kedisiplinan Al-Wildan Islamic School.</p>
-            
             <!-- TANDA TANGAN (MENGALIR SETELAH KONTEN SELESAI) -->
-            <table style="width: 100%; margin-top: 50px; text-align: center; page-break-inside: avoid;">
+            <div style="margin-top: 40px; text-align: right; margin-bottom: 20px;">
+                Kota ........................., <span id="bap-tgl-ttd">--</span>
+            </div>
+            
+            <div style="text-align: center; margin-bottom: 15px;">Mengetahui,</div>
+            
+            <table style="width: 100%; text-align: center; page-break-inside: avoid;">
                 <tr>
-                    <td style="width: 33%;">Siswa/i Bersangkutan,</td>
-                    <td style="width: 33%;">Mengetahui,<br>Orang Tua/Wali,</td>
-                    <td style="width: 33%;">Guru Bimbingan Konseling,</td>
+                    <td style="width: 50%;">Kepala Sekolah SD/SMP/SMA<br>atau Kepala Boarding</td>
+                    <td style="width: 50%;">Counselor Guidance and Counseling<br>AL-WILDAN ISLAMIC SCHOOL</td>
                 </tr>
-                <tr><td colspan="3" style="height: 80px;"></td></tr>
+                <tr><td colspan="2" style="height: 90px;"></td></tr>
                 <tr>
-                    <td>( ..................................... )<br><span id="bap-ttd-nama" style="font-size:10pt;">--</span></td>
-                    <td>( ..................................... )</td>
-                    <td>( ..................................... )<br><span id="bap-ttd-solver" style="font-size:10pt;">--</span></td>
+                    <td>( ..................................................... )</td>
+                    <td>( ..................................................... )<br><span id="bap-ttd-solver" style="font-size:10pt;">--</span></td>
                 </tr>
             </table>
-
-            <!-- HALAMAN BARU KHUSUS LAMPIRAN FOTO (JIKA ADA) -->
-            <div id="bap-page-2" style="page-break-before: always; margin-top: 20px;">
-                <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 20px;">LAMPIRAN BARANG BUKTI KEJADIAN</h2>
-                <p style="text-align: center; font-size: 10pt; color: #555; margin-bottom: 30px;">Bagian ini merupakan lampiran tidak terpisahkan dari <span id="bap-doc-id-2">Nomor: BAP/--/2026</span></p>
-                <div id="bap-foto-container" style="text-align: center;">
-                    <div class="bap-image-container">
-                        <img id="bap-foto-img" src="" crossorigin="anonymous" alt="Lampiran Bukti">
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -770,10 +786,7 @@
         let currentEditingId = null;
         let currentBase64ImageUpload = "";
 
-        /**
-         * Helper Function untuk mengirim request Fetch ke API Google Apps Script.
-         * Mode ini 100% jalan di GitHub atau Web Hosting mana pun.
-         */
+        // API Fetch logic replacing google.script.run for cross-origin capability
         async function fetchAPI(payload) {
             try {
                 const response = await fetch(API_URL, {
@@ -819,7 +832,7 @@
                             loginScreen.classList.add('hidden');
                             document.getElementById('main-nav').classList.remove('pointer-events-none', 'opacity-50');
                             document.getElementById('data-loader').classList.remove('hidden');
-                            fetchInitialDatabase(); // Panggil data dari Sheets
+                            fetchInitialDatabase(); // Fetch data from Sheets
                         }, 500); 
                     } else {
                         errorMsg.classList.remove('opacity-0');
@@ -838,9 +851,6 @@
                 });
         }
 
-        // ==========================================================
-        // PROSES SINKRONISASI DATA AWAL (LOADING SCREEN)
-        // ==========================================================
         function fetchInitialDatabase() {
             fetchAPI({ action: 'getInitialData' })
                 .then((result) => {
@@ -1073,7 +1083,25 @@
         }
 
         // ==========================================================
-        // SUBMIT KASUS BARU VIA FETCH API
+        // FUNGSI AUTO-ESKALASI DAN CEK RIWAYAT (BARU)
+        // ==========================================================
+        function hitungPelanggaranRingan(namaSiswa) {
+            // Menghitung berapa kali siswa ini melakukan pelanggaran ringan
+            const riwayatRingan = dataKasus.filter(k => k.nama === namaSiswa && k.kategori === 'Ringan');
+            return riwayatRingan.length;
+        }
+
+        function getBatasEskalasi(kelasStr) {
+            // Parsing kelas untuk mengetahui jenjang
+            const strLower = (kelasStr || "").toLowerCase();
+            if(strLower.includes("sd") || strLower.match(/^[1-6]\s/)) return 4; // SD kelas 4-6 batas 4 kali
+            if(strLower.includes("smp") || strLower.match(/^[7-9]\s/)) return 3; // SMP batas 3 kali
+            if(strLower.includes("sma") || strLower.match(/^1[0-2]\s/)) return 2; // SMA batas 2 kali
+            return 3; // Default
+        }
+
+        // ==========================================================
+        // SUBMIT KASUS BARU VIA FETCH API (DENGAN AUTO-CLOSE & AUTO-ESKALASI)
         // ==========================================================
         function submitForm(withPDF) {
             const form = document.getElementById('formKasus');
@@ -1081,21 +1109,46 @@
             
             const isCustom = document.getElementById('radioCustom').checked;
             const jenisPelanggaran = isCustom ? document.getElementById('inputJenisText').value : document.getElementById('inputJenisSelect').value;
-            const katValue = document.getElementById('inputKategori').value; // Mengambil value walaupun disabled
+            let katValue = document.getElementById('inputKategori').value; 
+            const namaSiswa = document.getElementById('inputNama').value;
+            const kelasSiswa = document.getElementById('inputKelas').value;
+            let finalStatus = 'Open'; // Default masuk BK
+            let autoNotes = '';
+
+            // --- LOGIKA AUTO-CLOSE DAN AUTO-ESKALASI ---
+            if (katValue === 'Ringan') {
+                const jumlahRinganSebelumnya = hitungPelanggaranRingan(namaSiswa);
+                const batasMax = getBatasEskalasi(kelasSiswa);
+                
+                // Jika sudah melewati batas toleransi Wali Kelas
+                if (jumlahRinganSebelumnya >= batasMax) {
+                    katValue = 'Sedang'; // PAKSA NAIK KE KATEGORI SEDANG
+                    finalStatus = 'Open'; // PAKSA MASUK BK
+                    autoNotes = `\n\n[SISTEM AUTO-ESKALASI]: Siswa telah mencapai batas maksimal pelanggaran Ringan penanganan Wali Kelas (${batasMax}x). Kasus ini otomatis ditingkatkan menjadi Kategori Sedang dan dilimpahkan ke GnC/BK untuk tahap pembinaan lanjutan.`;
+                    showToast("Peringatan Sistem", "Batas pelanggaran ringan tercapai. Kasus dieskalasi ke BK.");
+                } else {
+                    // Jika masih dalam batas wajar, biarkan Wali Kelas yang menangani
+                    finalStatus = 'Closed'; // AUTO-CLOSE
+                }
+            }
+            // -------------------------------------------
+
+            let finalDeskripsi = document.getElementById('inputDeskripsi').value || "-";
+            finalDeskripsi += autoNotes;
 
             const newId = 'KAS-' + Math.floor(100000 + Math.random() * 900000);
             const newData = {
                 id: newId, 
                 tanggal: document.getElementById('inputTanggal').value,
-                nama: document.getElementById('inputNama').value,
-                kelas: document.getElementById('inputKelas').value,
+                nama: namaSiswa,
+                kelas: kelasSiswa,
                 tipe: isCustom ? 'custom' : 'standard',
                 kategori: katValue, 
                 jenis: jenisPelanggaran,
-                deskripsi: document.getElementById('inputDeskripsi').value || "-", 
+                deskripsi: finalDeskripsi, 
                 pelapor: document.getElementById('inputPelapor').value,
                 lampiranImage: currentBase64ImageUpload, 
-                status: 'Open', solusi: '', solver: '', kronologiDetail: ''
+                status: finalStatus, solusi: '', solver: '', kronologiDetail: ''
             };
 
             const btnSave = document.getElementById('btn-save');
@@ -1304,32 +1357,33 @@
         }
 
         function processBAP(data) {
-            const docNum = `Nomor: BAP/${data.id.split('-')[1]}/GnC/2026`;
-            document.getElementById('bap-doc-id').innerText = docNum;
-            document.getElementById('bap-doc-id-2').innerText = docNum;
             document.getElementById('bap-tgl-cetak').innerText = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('bap-tgl-ttd').innerText = new Date().toLocaleDateString('id-ID', options);
+            
             document.getElementById('bap-nama').innerText = data.nama;
             document.getElementById('bap-kelas').innerText = data.kelas;
-            document.getElementById('bap-tgl-kejadian').innerText = data.tanggal;
             document.getElementById('bap-pelapor').innerText = data.pelapor;
-            document.getElementById('bap-kategori').innerText = data.kategori.toUpperCase() + (data.tipe === 'custom' ? ' (KASUS KHUSUS)' : '');
-            document.getElementById('bap-jenis').innerText = data.jenis;
-            document.getElementById('bap-deskripsi').innerText = data.deskripsi;
-            document.getElementById('bap-solusi').innerText = data.solusi || "(Belum ada penyelesaian tertulis saat BAP ini dicetak)";
-            document.getElementById('bap-ttd-nama').innerText = data.nama;
-            document.getElementById('bap-ttd-solver').innerText = data.solver || "(...............................)";
-
-            document.getElementById('bap-kronologi-detail').innerText = data.kronologiDetail || "(Investigasi belum ditulis/dilengkapi oleh BK)";
             
-            const fotoContainer = document.getElementById('bap-page-2');
-            const fotoImg = document.getElementById('bap-foto-img');
+            document.getElementById('bap-tgl-kejadian').innerText = data.tanggal;
+            document.getElementById('bap-kronologi-detail').innerText = data.kronologiDetail || data.deskripsi || "(Tidak ada rincian kronologi tercatat)";
+            
+            const imgInline = document.getElementById('bap-foto-img-inline');
+            const noImgInline = document.getElementById('bap-no-foto-inline');
             
             if (data.lampiranImage && data.lampiranImage.startsWith("http")) {
-                fotoImg.src = data.lampiranImage;
-                fotoContainer.style.display = 'block';
+                imgInline.src = data.lampiranImage;
+                imgInline.style.display = 'block';
+                noImgInline.style.display = 'none';
             } else {
-                fotoContainer.style.display = 'none';
+                imgInline.style.display = 'none';
+                noImgInline.style.display = 'inline-block';
             }
+
+            document.getElementById('bap-kategori').innerText = data.kategori.toUpperCase() + (data.tipe === 'custom' ? ' (KASUS KHUSUS)' : '');
+            document.getElementById('bap-jenis').innerText = data.jenis;
+            
+            document.getElementById('bap-solusi').innerText = data.solusi || "(Belum ada penyelesaian/sanksi tertulis saat BAP ini dicetak)";
+            document.getElementById('bap-ttd-solver').innerText = data.solver || "Nama Guru BK";
 
             const element = document.getElementById('bap-template');
             element.parentElement.classList.remove('hidden'); 
@@ -1340,8 +1394,8 @@
                 filename: `BAP_${data.nama}_${data.id}.pdf`, 
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true, allowTaint: true }, 
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak: { mode: 'avoid-all', before: '#bap-page-2' } // Paksa Break cuma di bagian lampiran foto
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                // pagebreak option removed to let it flow naturally over multiple pages
             };
 
             showToast("Memproses PDF", "Sedang membuat dokumen BAP...");
