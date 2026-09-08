@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Portal - Al-Wildan Islamic School</title>
-
-    <!-- Favicon --> 
-    <link rel="icon" type="image/png" href="favicon.png">
-    
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,24 +90,15 @@
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* BAP PDF Layout (A4) */
+        /* BAP PDF Layout Revisions (Auto-Flowing) */
         #bap-template { 
-            width: 210mm; 
             background: white; 
             font-family: 'Times New Roman', Times, serif; 
             color: black; 
             box-sizing: border-box;
-            position: relative;
+            font-size: 12pt;
+            line-height: 1.5;
         }
-        .bap-page {
-            width: 210mm;
-            height: 297mm;
-            padding: 20mm;
-            box-sizing: border-box;
-            page-break-after: always;
-            position: relative;
-        }
-        .bap-text { font-size: 12pt; line-height: 1.5; }
         .bap-image-container { text-align: center; margin-top: 20px; }
         .bap-image-container img { max-width: 100%; max-height: 120mm; object-fit: contain; border: 1px solid #ddd; padding: 5px; }
 
@@ -137,7 +124,6 @@
 </head>
 <body class="bg-mesh-pattern text-slate-800 h-screen overflow-hidden flex font-sans antialiased relative selection:bg-brand-accent selection:text-white">
 
-    <!-- Loading Screen -->
     <div id="data-loader" class="fixed inset-0 z-[110] flex items-center justify-center bg-brand-dark/50 backdrop-blur-md hidden transition-opacity">
         <div class="bg-white px-10 py-8 rounded-3xl shadow-2xl flex flex-col items-center max-w-sm w-full mx-4 border border-white/20 text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-blue-50/50"></div>
@@ -149,8 +135,7 @@
         </div>
     </div>
 
-    <!-- LOGIN SCREEN (Centered Card API Version) -->
-    <div id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#1e3a8a] transition-opacity duration-700" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.07) 1px, transparent 0); background-size: 24px 24px;">
+    <div id="login-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#3a4eb5] transition-opacity duration-700" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.07) 1px, transparent 0); background-size: 24px 24px;">
         <div id="login-form-container" class="w-full max-w-[420px] mx-4 bg-white rounded-[24px] shadow-2xl overflow-hidden flex flex-col transform transition-transform">
             
             <div class="bg-gradient-to-b from-[#3a4eb5] to-[#1e3a8a] pt-10 pb-8 flex flex-col items-center text-center relative">
@@ -193,7 +178,6 @@
     <div class="blob bg-blue-300 w-96 h-96 rounded-full top-[-10%] left-[-5%]"></div>
     <div class="blob bg-purple-200 w-80 h-80 rounded-full bottom-[10%] right-[-5%] animation-delay-2000"></div>
 
-    <!-- Sidebar -->
     <aside class="w-72 bg-gradient-to-b from-[#3a4eb5] via-[#2a388f] to-brand-dark text-white flex flex-col h-full shadow-[10px_0_30px_rgba(0,0,0,0.1)] relative z-20 transition-all duration-300 border-r border-white/10">
         <!-- Logo Area -->
         <div class="p-8 flex flex-col items-center border-b border-white/10 relative overflow-hidden">
@@ -239,7 +223,6 @@
         </div>
     </aside>
 
-    <!-- Main Content -->
     <main class="flex-1 flex flex-col h-screen overflow-hidden relative z-10">
         <!-- Top Header (Glassmorphism) -->
         <header class="h-20 glass-header flex items-center justify-between px-8 z-30 sticky top-0">
@@ -258,7 +241,6 @@
         <!-- Scrollable Content Area -->
         <div class="flex-1 overflow-y-auto p-6 lg:p-8 z-20">
             
-            <!-- TAB 1: DASHBOARD -->
             <div id="pane-dashboard" class="tab-pane space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="glass-panel rounded-3xl p-6 relative overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-1">
@@ -340,7 +322,6 @@
                 </div>
             </div>
 
-            <!-- TAB 2: INPUT KASUS -->
             <div id="pane-input" class="tab-pane hidden">
                 <div class="max-w-4xl mx-auto glass-panel rounded-3xl overflow-hidden shadow-2xl shadow-brand-blue/5 border border-white/60">
                     <div class="bg-gradient-to-r from-brand-blue via-[#2a388f] to-purple-800 px-10 py-10 relative overflow-hidden">
@@ -414,6 +395,8 @@
                                             <option value="Sedang">Pelanggaran Sedang</option>
                                             <option value="Berat">Pelanggaran Berat</option>
                                             <option value="Sangat Berat">Sangat Berat (5 Malapetaka)</option>
+                                            <!-- Hidden option for Auto-Uncategorized -->
+                                            <option value="Uncategorized" class="hidden" id="optUncategorized">Uncategorized (Kasus Khusus)</option>
                                         </select>
                                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-blue"><i class="ph ph-caret-down font-black"></i></div>
                                     </div>
@@ -469,7 +452,6 @@
                 </div>
             </div>
 
-            <!-- TAB 3: PROSES KASUS -->
             <div id="pane-proses" class="tab-pane hidden space-y-6">
                 <div class="flex justify-between items-end mb-4">
                     <div>
@@ -487,7 +469,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="kasus-grid"></div>
             </div>
 
-            <!-- TAB 4: CEK PROFIL SISWA -->
             <div id="pane-ceksiswa" class="tab-pane hidden space-y-8">
                 <div class="relative overflow-hidden bg-gradient-to-br from-brand-blue via-[#2a388f] to-purple-900 p-10 rounded-3xl shadow-xl shadow-brand-blue/20 border border-white/20 text-center max-w-4xl mx-auto">
                     <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
@@ -561,7 +542,6 @@
                 </div>
             </div>
 
-            <!-- TAB 5: ENSIKLOPEDIA -->
             <div id="pane-ensiklopedia" class="tab-pane hidden space-y-6">
                 <div class="glass-panel rounded-3xl shadow-lg border border-white/70 flex flex-col h-[calc(100vh-160px)] overflow-hidden">
                     <div class="p-8 border-b border-white/50 flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/30 backdrop-blur-sm">
@@ -591,7 +571,6 @@
                 </div>
             </div>
 
-            <!-- TAB 6: REKAP & EXPORT -->
             <div id="pane-rekap" class="tab-pane hidden space-y-6">
                 <div class="glass-panel p-8 rounded-3xl border border-white/70 shadow-lg mb-6">
                     <h3 class="text-2xl font-black text-slate-800 flex items-center gap-3 mb-1"><i class="ph ph-database text-brand-blue text-3xl"></i> Master Database Kasus</h3>
@@ -660,7 +639,7 @@
                             
                             <div class="space-y-5">
                                 <div>
-                                    <label class="block text-[12px] font-bold text-slate-600 mb-2">1. Hasil Investigasi / Kronologi Detail</label>
+                                    <label class="block text-[12px] font-bold text-slate-600 mb-2">1. Hasil Investigasi / Kronologi Lengkap</label>
                                     <textarea id="mod-input-kronologidetail" rows="6" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue outline-none font-medium text-[13px] text-slate-700 bg-white shadow-sm resize-none" placeholder="Tuliskan cerita lengkap hasil investigasi BK..."></textarea>
                                 </div>
                                 
@@ -704,68 +683,62 @@
     <!-- HIDDEN BAP TEMPLATE FOR PDF EXPORT -->
     <div class="hidden">
         <div id="bap-template">
-            <!-- PAGE 1 -->
-            <div class="bap-page">
-                <div style="border-bottom: 3px solid black; padding-bottom: 10px; margin-bottom: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 20px;">
-                    <img src="https://i.ibb.co.com/TxnhtcFT/favicon.png" alt="Logo" crossorigin="anonymous" style="width: 80px; height: 80px; object-fit: contain;">
-                    <div>
-                        <h1 style="font-size: 18pt; font-weight: bold; margin: 0; text-transform: uppercase;">AL-WILDAN ISLAMIC SCHOOL</h1>
-                        <p style="font-size: 11pt; margin: 5px 0 0 0;">Divisi Kedisiplinan dan Bimbingan Konseling (GnC)</p>
-                    </div>
-                </div>
-                
-                <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 5px;">BERITA ACARA PEMERIKSAAN KASUS</h2>
-                <p style="text-align: center; margin-top:0; font-size: 11pt;" id="bap-doc-id">Nomor: BAP/--/2026</p>
-
-                <div class="bap-text" style="margin-top: 30px;">
-                    <p>Pada hari ini, tanggal <strong id="bap-tgl-cetak">--</strong>, telah dilakukan pemeriksaan dan klarifikasi terhadap siswa/i berikut:</p>
-                    <table style="width: 100%; margin-top: 15px; margin-bottom: 20px;">
-                        <tr><td style="width: 30%; padding: 5px 0;">Nama Lengkap</td><td style="width: 5%;">:</td><td><strong id="bap-nama">--</strong></td></tr>
-                        <tr><td style="padding: 5px 0;">Kelas / Jenjang</td><td>:</td><td><span id="bap-kelas">--</span></td></tr>
-                        <tr><td style="padding: 5px 0;">Tanggal Kejadian</td><td>:</td><td><span id="bap-tgl-kejadian">--</span></td></tr>
-                        <tr><td style="padding: 5px 0;">Pelapor Awal</td><td>:</td><td><span id="bap-pelapor">--</span></td></tr>
-                    </table>
-
-                    <p style="font-weight: bold; text-decoration: underline;">Rincian Pelanggaran:</p>
-                    <p style="margin-top: 5px;">Kategori: <strong id="bap-kategori">--</strong></p>
-                    <p style="margin-top: 5px; font-weight: bold;" id="bap-jenis">--</p>
-                    <p style="margin-top: 5px; font-style: italic; border-left: 2px solid black; padding-left: 10px;" id="bap-deskripsi">--</p>
-
-                    <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Penyelesaian / Komitmen (Sanksi):</p>
-                    <p style="margin-top: 5px; min-height: 60px; border: 1px solid #ccc; padding: 10px;" id="bap-solusi">--</p>
-
-                    <p style="margin-top: 20px;">Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk digunakan sebagaimana mestinya sesuai dengan panduan kedisiplinan Al-Wildan Islamic School.</p>
-                    
-                    <table style="width: 100%; margin-top: 50px; text-align: center;">
-                        <tr>
-                            <td style="width: 33%;">Siswa/i Bersangkutan,</td>
-                            <td style="width: 33%;">Mengetahui,<br>Orang Tua/Wali,</td>
-                            <td style="width: 33%;">Guru Bimbingan Konseling,</td>
-                        </tr>
-                        <tr><td colspan="3" style="height: 80px;"></td></tr>
-                        <tr>
-                            <td>( ..................................... )<br><span id="bap-ttd-nama" style="font-size:10pt;">--</span></td>
-                            <td>( ..................................... )</td>
-                            <td>( ..................................... )<br><span id="bap-ttd-solver" style="font-size:10pt;">--</span></td>
-                        </tr>
-                    </table>
+            <!-- HEADER BAP -->
+            <div style="border-bottom: 3px solid black; padding-bottom: 10px; margin-bottom: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 20px;">
+                <img src="https://i.ibb.co.com/TxnhtcFT/favicon.png" alt="Logo" crossorigin="anonymous" style="width: 80px; height: 80px; object-fit: contain;">
+                <div>
+                    <h1 style="font-size: 18pt; font-weight: bold; margin: 0; text-transform: uppercase;">AL-WILDAN ISLAMIC SCHOOL</h1>
+                    <p style="font-size: 11pt; margin: 5px 0 0 0;">Divisi Kedisiplinan dan Bimbingan Konseling (GnC)</p>
                 </div>
             </div>
+            
+            <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 5px;">BERITA ACARA PEMERIKSAAN KASUS</h2>
+            <p style="text-align: center; margin-top:0; font-size: 11pt; margin-bottom: 30px;" id="bap-doc-id">Nomor: BAP/--/2026</p>
 
-            <!-- PAGE 2 -->
-            <div class="bap-page" id="bap-page-2">
-                <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 20px;">LAMPIRAN & DETAIL INVESTIGASI</h2>
+            <!-- KONTEN MENGALIR OTOMATIS -->
+            <p>Pada hari ini, tanggal <strong id="bap-tgl-cetak">--</strong>, telah dilakukan pemeriksaan dan klarifikasi terhadap siswa/i berikut:</p>
+            <table style="width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                <tr><td style="width: 30%; padding: 5px 0;">Nama Lengkap</td><td style="width: 5%;">:</td><td><strong id="bap-nama">--</strong></td></tr>
+                <tr><td style="padding: 5px 0;">Kelas / Jenjang</td><td>:</td><td><span id="bap-kelas">--</span></td></tr>
+                <tr><td style="padding: 5px 0;">Tanggal Kejadian</td><td>:</td><td><span id="bap-tgl-kejadian">--</span></td></tr>
+                <tr><td style="padding: 5px 0;">Pelapor Awal</td><td>:</td><td><span id="bap-pelapor">--</span></td></tr>
+            </table>
+
+            <p style="font-weight: bold; text-decoration: underline;">Rincian Pelanggaran:</p>
+            <p style="margin-top: 5px;">Kategori: <strong id="bap-kategori">--</strong></p>
+            <p style="margin-top: 5px; font-weight: bold;" id="bap-jenis">--</p>
+            <p style="margin-top: 5px; font-style: italic; border-left: 2px solid black; padding-left: 10px;" id="bap-deskripsi">--</p>
+
+            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Hasil Investigasi / Kronologi Lengkap:</p>
+            <div style="border: 1px solid #ccc; padding: 15px; min-height: 100px; white-space: pre-wrap; background: #f9f9f9; text-align: justify; margin-top: 5px;" id="bap-kronologi-detail">--</div>
+
+            <p style="font-weight: bold; text-decoration: underline; margin-top: 20px;">Penyelesaian / Komitmen (Sanksi):</p>
+            <p style="margin-top: 5px; min-height: 60px; border: 1px solid #ccc; padding: 10px;" id="bap-solusi">--</p>
+
+            <p style="margin-top: 20px;">Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk digunakan sebagaimana mestinya sesuai dengan panduan kedisiplinan Al-Wildan Islamic School.</p>
+            
+            <!-- TANDA TANGAN (MENGALIR SETELAH KONTEN SELESAI) -->
+            <table style="width: 100%; margin-top: 50px; text-align: center; page-break-inside: avoid;">
+                <tr>
+                    <td style="width: 33%;">Siswa/i Bersangkutan,</td>
+                    <td style="width: 33%;">Mengetahui,<br>Orang Tua/Wali,</td>
+                    <td style="width: 33%;">Guru Bimbingan Konseling,</td>
+                </tr>
+                <tr><td colspan="3" style="height: 80px;"></td></tr>
+                <tr>
+                    <td>( ..................................... )<br><span id="bap-ttd-nama" style="font-size:10pt;">--</span></td>
+                    <td>( ..................................... )</td>
+                    <td>( ..................................... )<br><span id="bap-ttd-solver" style="font-size:10pt;">--</span></td>
+                </tr>
+            </table>
+
+            <!-- HALAMAN BARU KHUSUS LAMPIRAN FOTO (JIKA ADA) -->
+            <div id="bap-page-2" style="page-break-before: always; margin-top: 20px;">
+                <h2 style="font-size: 14pt; font-weight: bold; text-align: center; text-decoration: underline; margin-bottom: 20px;">LAMPIRAN BARANG BUKTI KEJADIAN</h2>
                 <p style="text-align: center; font-size: 10pt; color: #555; margin-bottom: 30px;">Bagian ini merupakan lampiran tidak terpisahkan dari <span id="bap-doc-id-2">Nomor: BAP/--/2026</span></p>
-
-                <div class="bap-text">
-                    <p style="font-weight: bold; text-decoration: underline; margin-bottom: 10px;">Hasil Investigasi / Kronologi Lengkap:</p>
-                    <div style="border: 1px solid #ccc; padding: 15px; min-height: 100px; white-space: pre-wrap; background: #f9f9f9;" id="bap-kronologi-detail">--</div>
-                    
-                    <div id="bap-foto-container" style="margin-top: 30px;">
-                        <p style="font-weight: bold; text-decoration: underline; margin-bottom: 10px;">Lampiran Foto Barang Bukti Kejadian:</p>
-                        <div class="bap-image-container">
-                            <img id="bap-foto-img" src="" crossorigin="anonymous" alt="Lampiran Bukti">
-                        </div>
+                <div id="bap-foto-container" style="text-align: center;">
+                    <div class="bap-image-container">
+                        <img id="bap-foto-img" src="" crossorigin="anonymous" alt="Lampiran Bukti">
                     </div>
                 </div>
             </div>
@@ -784,37 +757,40 @@
     </div>
 
     <script>
+        // MASUKKAN URL API DARI GOOGLE APPS SCRIPT DI SINI
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwo9EyEWDTndod2E_E7GT1BH_IYBDPKp25j60hRgpuUtr0l0r_wh3EbEh4ZW5FWN-Jo/exec';
+
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('current-date').textContent = new Date().toLocaleDateString('id-ID', options);
 
         let masterPelanggaran = [];
         let dataKasus = [];
-        let dataSiswaGlobal = []; // Array to store master student data
+        let dataSiswaGlobal = [];
         let myChart = null;
         let currentEditingId = null;
         let currentBase64ImageUpload = "";
 
-        // ============================================================================
-        // API CONFIGURATION 
-        // ============================================================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwo9EyEWDTndod2E_E7GT1BH_IYBDPKp25j60hRgpuUtr0l0r_wh3EbEh4ZW5FWN-Jo/exec';
-
         /**
          * Helper Function untuk mengirim request Fetch ke API Google Apps Script.
+         * Mode ini 100% jalan di GitHub atau Web Hosting mana pun.
          */
         async function fetchAPI(payload) {
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // Text plain prevents CORS preflight issues
                 });
                 return await response.json();
             } catch (error) {
-                console.error("API Error:", error);
+                console.error("API Fetch Error:", error);
                 throw error;
             }
         }
 
+        // ==========================================================
+        // PROSES LOGIN
+        // ==========================================================
         function attemptLogin() {
             const user = document.getElementById('login-username');
             const pass = document.getElementById('login-password');
@@ -835,7 +811,6 @@
                     
                     if(response.success) {
                         document.getElementById('sidebar-role').innerText = response.role;
-                        
                         const loginScreen = document.getElementById('login-screen');
                         loginScreen.style.opacity = '0';
                         loginScreen.style.pointerEvents = 'none';
@@ -843,11 +818,8 @@
                         setTimeout(() => {
                             loginScreen.classList.add('hidden');
                             document.getElementById('main-nav').classList.remove('pointer-events-none', 'opacity-50');
-                            
                             document.getElementById('data-loader').classList.remove('hidden');
-                            fetchInitialDatabase(); // Fetch data after successful login
-                            
-                            showToast("Akses Diterima", "Selamat datang di sistem kedisiplinan.");
+                            fetchInitialDatabase(); // Panggil data dari Sheets
                         }, 500); 
                     } else {
                         errorMsg.classList.remove('opacity-0');
@@ -861,27 +833,35 @@
                 .catch((error) => {
                     btn.innerHTML = 'Masuk Portal <i class="ph ph-sign-in text-lg"></i>';
                     btn.disabled = false;
-                    showToast("Error Koneksi", "Gagal menghubungi server. Pastikan URL API benar.");
+                    errorMsg.classList.remove('opacity-0');
+                    errorMsg.innerHTML = `<i class="ph ph-warning-circle text-base"></i> Gagal terhubung ke Server API.`;
                 });
         }
 
+        // ==========================================================
+        // PROSES SINKRONISASI DATA AWAL (LOADING SCREEN)
+        // ==========================================================
         function fetchInitialDatabase() {
             fetchAPI({ action: 'getInitialData' })
                 .then((result) => {
-                    masterPelanggaran = result.masterPelanggaran || [];
-                    dataKasus = result.dataKasus || [];
-                    dataSiswaGlobal = result.dataSiswa || []; // Fetch student data
-                    
-                    document.getElementById('data-loader').classList.add('hidden');
-                    
-                    switchTab('dashboard'); 
-                    updateBadge();
-                    updateDropdownPelanggaran(); 
-                    populateDropdownKelas(); // Populate Class dropdown
+                    if(result.success) {
+                        masterPelanggaran = result.masterPelanggaran || [];
+                        dataKasus = result.dataKasus || [];
+                        dataSiswaGlobal = result.dataSiswa || [];
+                        
+                        document.getElementById('data-loader').classList.add('hidden');
+                        switchTab('dashboard'); 
+                        updateBadge();
+                        updateDropdownPelanggaran(); 
+                        populateDropdownKelas();
+                        showToast("Akses Diterima", "Berhasil terhubung dengan Database Utama.");
+                    } else {
+                        throw new Error(result.message);
+                    }
                 })
                 .catch((error) => {
                     document.getElementById('data-loader').classList.add('hidden');
-                    showToast("Error Sinkronisasi", "Gagal memuat database: " + error);
+                    alert("Gagal memuat database dari Server: " + error);
                 });
         }
 
@@ -923,6 +903,9 @@
             setTimeout(() => { toast.classList.add('translate-y-[150%]', 'opacity-0'); }, 4000);
         }
 
+        // ==========================================================
+        // RENDER TAB DASHBOARD
+        // ==========================================================
         function renderDashboard() {
             document.getElementById('dash-total').innerText = dataKasus.length;
             document.getElementById('dash-sedangplus').innerText = dataKasus.filter(k => k.kategori === 'Sedang' || k.kategori === 'Berat').length;
@@ -949,19 +932,23 @@
                 });
             }
 
-            const counts = { 'Ringan':0, 'Sedang':0, 'Berat':0, 'Sangat Berat':0 };
+            const counts = { 'Ringan':0, 'Sedang':0, 'Berat':0, 'Sangat Berat':0, 'Uncategorized':0 };
             dataKasus.forEach(k => {
                 if (counts[k.kategori] !== undefined) counts[k.kategori]++;
+                else counts['Uncategorized']++;
             });
             const ctx = document.getElementById('categoryChart').getContext('2d');
             if(myChart) myChart.destroy();
             myChart = new Chart(ctx, {
                 type: 'doughnut',
-                data: { labels: ['Ringan', 'Sedang', 'Berat', '5 Malapetaka'], datasets: [{ data: [counts['Ringan'], counts['Sedang'], counts['Berat'], counts['Sangat Berat']], backgroundColor: ['#3b82f6', '#eab308', '#f97316', '#e11d48'], borderWidth: 0, hoverOffset: 10 }] },
+                data: { labels: ['Ringan', 'Sedang', 'Berat', '5 Malapetaka', 'Khusus'], datasets: [{ data: [counts['Ringan'], counts['Sedang'], counts['Berat'], counts['Sangat Berat'], counts['Uncategorized']], backgroundColor: ['#3b82f6', '#eab308', '#f97316', '#e11d48', '#8b5cf6'], borderWidth: 0, hoverOffset: 10 }] },
                 options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20, font: { family: "'Plus Jakarta Sans'", weight: 'bold', size: 10 } } } } }
             });
         }
 
+        // ==========================================================
+        // CASCADING DROPDOWN KELAS & NAMA SISWA
+        // ==========================================================
         function populateDropdownKelas() {
             const selectKelas = document.getElementById('inputKelas');
             selectKelas.innerHTML = '<option value="" disabled selected>Pilih Kelas...</option>';
@@ -987,7 +974,6 @@
                 selectNama.classList.remove('bg-slate-100', 'opacity-60');
                 
                 const filterSiswa = dataSiswaGlobal.filter(item => item.kelas === selectedKelas).sort((a, b) => a.nama.localeCompare(b.nama));
-                
                 filterSiswa.forEach(siswa => {
                     selectNama.innerHTML += `<option value="${siswa.nama}">${siswa.nama}</option>`;
                 });
@@ -997,23 +983,45 @@
             }
         }
 
+        // ==========================================================
+        // LOGIKA KATEGORI "UNCATEGORIZED" UNTUK KASUS KHUSUS
+        // ==========================================================
         function toggleTipePelanggaran() {
             const isCustom = document.getElementById('radioCustom').checked;
             const containerSelect = document.getElementById('containerSelectJenis');
             const containerText = document.getElementById('containerTextJenis');
             const inputSelect = document.getElementById('inputJenisSelect');
             const inputText = document.getElementById('inputJenisText');
+            
+            // Elemen Kategori
+            const inputKategori = document.getElementById('inputKategori');
+            const optUncategorized = document.getElementById('optUncategorized');
 
             if(isCustom) {
+                // Tampilan untuk Kasus Khusus
                 containerSelect.classList.add('hidden');
                 containerText.classList.remove('hidden');
                 inputSelect.removeAttribute('required');
                 inputText.setAttribute('required', 'true');
+                
+                // Ubah Kategori jadi Uncategorized dan Kunci
+                optUncategorized.classList.remove('hidden');
+                inputKategori.value = 'Uncategorized';
+                inputKategori.disabled = true;
+                inputKategori.classList.add('bg-slate-100', 'opacity-60', 'cursor-not-allowed', 'text-slate-500');
             } else {
+                // Tampilan Sesuai Buku
                 containerSelect.classList.remove('hidden');
                 containerText.classList.add('hidden');
                 inputText.removeAttribute('required');
                 inputSelect.setAttribute('required', 'true');
+                
+                // Buka Kunci Kategori dan Kosongkan lagi
+                inputKategori.disabled = false;
+                inputKategori.value = '';
+                optUncategorized.classList.add('hidden');
+                inputKategori.classList.remove('bg-slate-100', 'opacity-60', 'cursor-not-allowed', 'text-slate-500');
+                updateDropdownPelanggaran(); // Reset dropdown rincian
             }
         }
 
@@ -1021,7 +1029,7 @@
             const kat = document.getElementById('inputKategori').value;
             const selectJenis = document.getElementById('inputJenisSelect');
             selectJenis.innerHTML = '<option value="" disabled selected>Pilih Rincian Pelanggaran...</option>';
-            if(kat && masterPelanggaran.length > 0) {
+            if(kat && kat !== 'Uncategorized' && masterPelanggaran.length > 0) {
                 selectJenis.disabled = false; selectJenis.classList.remove('bg-slate-100', 'opacity-60'); selectJenis.classList.add('bg-white/80');
                 masterPelanggaran.filter(item => item.kategori === kat).forEach(item => {
                     selectJenis.innerHTML += `<option value="${item.desc}">(Pasal ${item.no}) - ${item.desc}</option>`;
@@ -1029,6 +1037,9 @@
             }
         }
 
+        // ==========================================================
+        // PREVIEW FOTO DAN KOMPRESI
+        // ==========================================================
         document.getElementById('inputFotoBukti').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if(file) {
@@ -1061,21 +1072,25 @@
             document.getElementById('previewImage').src = "";
         }
 
+        // ==========================================================
+        // SUBMIT KASUS BARU VIA FETCH API
+        // ==========================================================
         function submitForm(withPDF) {
             const form = document.getElementById('formKasus');
             if(!form.checkValidity()) { form.reportValidity(); return; }
             
             const isCustom = document.getElementById('radioCustom').checked;
             const jenisPelanggaran = isCustom ? document.getElementById('inputJenisText').value : document.getElementById('inputJenisSelect').value;
+            const katValue = document.getElementById('inputKategori').value; // Mengambil value walaupun disabled
 
             const newId = 'KAS-' + Math.floor(100000 + Math.random() * 900000);
             const newData = {
                 id: newId, 
                 tanggal: document.getElementById('inputTanggal').value,
-                nama: document.getElementById('inputNama').value, // Mengambil value dari Dropdown Nama
-                kelas: document.getElementById('inputKelas').value, // Mengambil value dari Dropdown Kelas
+                nama: document.getElementById('inputNama').value,
+                kelas: document.getElementById('inputKelas').value,
                 tipe: isCustom ? 'custom' : 'standard',
-                kategori: document.getElementById('inputKategori').value, 
+                kategori: katValue, 
                 jenis: jenisPelanggaran,
                 deskripsi: document.getElementById('inputDeskripsi').value || "-", 
                 pelapor: document.getElementById('inputPelapor').value,
@@ -1099,7 +1114,7 @@
                         
                         dataKasus.push(newData);
                         updateBadge();
-                        showToast("Tersimpan di Database!", `ID: ${newId} masuk antrean BK.`);
+                        showToast("Tersimpan di Database!", `ID: ${newId} berhasil dikirim.`);
                         
                         if(withPDF) { processBAP(newData); }
                         
@@ -1107,7 +1122,6 @@
                         document.getElementById('radioStandard').checked = true;
                         toggleTipePelanggaran();
                         
-                        // Reset Dropdowns
                         document.getElementById('inputJenisSelect').disabled = true;
                         document.getElementById('inputJenisSelect').innerHTML = '<option value="" disabled selected>Pilih Kategori Terlebih Dahulu...</option>';
                         document.getElementById('inputJenisSelect').classList.add('bg-slate-100', 'opacity-60');
@@ -1124,10 +1138,13 @@
                 .catch((err) => {
                     btnSave.disabled = false; btnSavePdf.disabled = false;
                     btnSave.innerText = "Simpan (Antrean BK)";
-                    showToast("Error", "Gagal koneksi ke server saat menyimpan.");
+                    showToast("Error Koneksi", "Gagal mengirim data ke server API.");
                 });
         }
 
+        // ==========================================================
+        // RENDER DAN KELOLA TAB PROSES PENANGANAN (BK)
+        // ==========================================================
         function renderProsesKasus() {
             const filter = document.getElementById('filter-status').value;
             const grid = document.getElementById('kasus-grid');
@@ -1182,6 +1199,8 @@
             
             const imgContainer = document.getElementById('mod-bukti-container');
             const imgEl = document.getElementById('mod-bukti-img');
+            
+            // Bypass CORS issues visually for the modal
             if(data.lampiranImage && data.lampiranImage.startsWith("http")) {
                 imgEl.src = data.lampiranImage;
                 imgContainer.classList.remove('hidden');
@@ -1242,10 +1261,13 @@
                 .catch((err) => {
                     btnSave.disabled = false; btnPdf.disabled = false;
                     btnSave.innerText = "Simpan Progress";
-                    showToast("Error", "Gagal koneksi server saat update.");
+                    showToast("Error", "Gagal menghubungi server API.");
                 });
         }
 
+        // ==========================================================
+        // CETAK BAP (PDF GENERATOR dengan html2pdf)
+        // ==========================================================
         function exportBAPFromModal() {
             if(!currentEditingId) return;
             
@@ -1258,9 +1280,10 @@
             };
 
             const btnPdf = document.getElementById('btn-mod-pdf');
-            btnPdf.innerHTML = '<i class="ph ph-spinner-gap animate-spin"></i> Menyimpan...';
+            btnPdf.innerHTML = '<i class="ph ph-spinner-gap animate-spin"></i> Menyimpan & Mencetak...';
             btnPdf.disabled = true;
 
+            // Simpan progress dulu, baru cetak PDF
             fetchAPI({ action: 'updateKasusBK', dataUpdate: dataUpdate })
                 .then((res) => {
                     btnPdf.innerHTML = '<i class="ph ph-file-pdf text-xl"></i> Simpan & Cetak BAP';
@@ -1273,7 +1296,11 @@
                         closeModal(); renderProsesKasus(); updateBadge();
                     }
                 })
-                .catch((err)=>{ btnPdf.disabled=false; showToast("Error", "Gagal koneksi"); });
+                .catch((err)=>{ 
+                    btnPdf.disabled=false; 
+                    btnPdf.innerHTML = '<i class="ph ph-file-pdf text-xl"></i> Simpan & Cetak BAP';
+                    showToast("Error", "Gagal menghubungi server API."); 
+                });
         }
 
         function processBAP(data) {
@@ -1294,7 +1321,7 @@
 
             document.getElementById('bap-kronologi-detail').innerText = data.kronologiDetail || "(Investigasi belum ditulis/dilengkapi oleh BK)";
             
-            const fotoContainer = document.getElementById('bap-foto-container');
+            const fotoContainer = document.getElementById('bap-page-2');
             const fotoImg = document.getElementById('bap-foto-img');
             
             if (data.lampiranImage && data.lampiranImage.startsWith("http")) {
@@ -1307,18 +1334,26 @@
             const element = document.getElementById('bap-template');
             element.parentElement.classList.remove('hidden'); 
 
+            // MARGIN OTOMATIS: 15mm dari segala sisi, biar tidak nabrak kertas
             const opt = {
-                margin: 0, filename: `BAP_${data.nama}_${data.id}.pdf`, image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true, allowTaint: true }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                margin: [15, 15, 15, 15], 
+                filename: `BAP_${data.nama}_${data.id}.pdf`, 
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, allowTaint: true }, 
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid-all', before: '#bap-page-2' } // Paksa Break cuma di bagian lampiran foto
             };
 
-            showToast("Memproses PDF", "Sedang mengunduh 2 Halaman BAP...");
+            showToast("Memproses PDF", "Sedang membuat dokumen BAP...");
             
             html2pdf().set(opt).from(element).save().then(() => {
                 element.parentElement.classList.add('hidden');
             });
         }
 
+        // ==========================================================
+        // PROFIL SISWA & RIWAYAT KASUS
+        // ==========================================================
         function searchSiswaAction() {
             const query = document.getElementById('searchSiswaInput').value.toLowerCase().trim();
             if(!query) return;
@@ -1342,9 +1377,10 @@
             document.getElementById('resNamaSiswa').innerText = namaAsli;
             document.getElementById('resKelasSiswa').innerText = history[0].kelas;
 
-            let c = { 'Ringan':0, 'Sedang':0, 'Berat':0, 'Sangat Berat':0 };
+            let c = { 'Ringan':0, 'Sedang':0, 'Berat':0, 'Sangat Berat':0, 'Uncategorized':0 };
             history.forEach(k => {
                 if (c[k.kategori] !== undefined) c[k.kategori]++;
+                else c['Uncategorized']++;
             });
             document.getElementById('count-ringan').innerText = c['Ringan'];
             document.getElementById('count-sedang').innerText = c['Sedang'];
@@ -1355,7 +1391,8 @@
             if (c['Sangat Berat'] > 0) { statusText = "Kritis (SP3/DO)"; statusClass = "bg-red-100 text-red-800 ring-red-500/30 shadow-lg shadow-red-500/20"; }
             else if (c['Berat'] > 0 || c['Ringan'] >= 11) { statusText = "Bahaya (Tahap SP2)"; statusClass = "bg-orange-100 text-orange-800 ring-orange-500/30"; }
             else if (c['Sedang'] > 0 || c['Ringan'] >= 4) { statusText = "Waspada (Tahap SP1)"; statusClass = "bg-yellow-100 text-yellow-700 ring-yellow-500/30"; }
-            else if (c['Ringan'] < 4) { statusText = "Bimbingan Wali Kelas"; statusClass = "bg-blue-100 text-blue-800 ring-blue-500/30"; }
+            else if (c['Ringan'] < 4 && c['Uncategorized'] === 0) { statusText = "Bimbingan Wali Kelas"; statusClass = "bg-blue-100 text-blue-800 ring-blue-500/30"; }
+            else { statusText = "Perlu Ditinjau (Kasus Khusus)"; statusClass = "bg-purple-100 text-purple-800 ring-purple-500/30"; }
             
             setStatusBadge(statusText, statusClass);
 
@@ -1374,6 +1411,9 @@
         }
         function setStatusBadge(t, c) { const b = document.getElementById('resStatusSiswa'); b.innerText = t; b.className = `px-5 py-2.5 rounded-xl text-sm font-black inline-block ring-2 ${c}`; }
 
+        // ==========================================================
+        // LAIN-LAIN (ENSIKLOPEDIA, TABEL REKAP, HELPER)
+        // ==========================================================
         function renderEnsiklopedia() {
             const tbody = document.getElementById('ensiklopediaTable');
             tbody.innerHTML = '';
@@ -1420,6 +1460,7 @@
             if(kat === 'Sedang') return '<span class="px-2 py-1 text-[10px] font-black rounded bg-yellow-50 text-yellow-600 border border-yellow-200 uppercase tracking-widest">SEDANG</span>';
             if(kat === 'Berat') return '<span class="px-2 py-1 text-[10px] font-black rounded bg-orange-50 text-orange-600 border border-orange-200 uppercase tracking-widest">BERAT</span>';
             if(kat === 'Sangat Berat') return '<span class="px-2 py-1 text-[10px] font-black rounded bg-red-50 text-red-600 border border-red-200 uppercase tracking-widest">MALAPETAKA</span>';
+            if(kat === 'Uncategorized') return '<span class="px-2 py-1 text-[10px] font-black rounded bg-purple-50 text-purple-600 border border-purple-200 uppercase tracking-widest">UNCATEGORIZED</span>';
             return `<span class="px-2 py-1 text-[10px] font-black rounded bg-slate-100 text-slate-700">${kat}</span>`;
         }
     </script>
