@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Portal - Al-Wildan Islamic School</title>
+
+    <!-- Favicon --> 
+    <link rel="icon" type="image/png" href="favicon.png">
+    
     
     <!-- Google Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,7 +144,7 @@
             <div class="relative z-10 flex flex-col items-center">
                 <i class="ph ph-circle-notch text-5xl text-brand-blue animate-spin mb-4"></i>
                 <h3 class="text-lg font-black text-slate-800">Sinkronisasi Database</h3>
-                <p class="text-sm font-semibold text-slate-500 mt-1">Mengambil data aturan dan kasus dari Server API...</p>
+                <p class="text-sm font-semibold text-slate-500 mt-1">Mengambil data aturan, daftar siswa, dan kasus dari Server API...</p>
             </div>
         </div>
     </div>
@@ -349,6 +353,7 @@
                     </div>
                     
                     <form id="formKasus" class="p-10 space-y-8 bg-white/40 backdrop-blur-md">
+                        <!-- Identitas Section -->
                         <div class="bg-white/70 p-6 rounded-2xl border border-white shadow-sm space-y-5">
                             <h4 class="font-black text-slate-800 border-b border-slate-100 pb-3 mb-2 flex items-center gap-2"><i class="ph ph-identification-card text-xl text-brand-blue"></i> Data Kejadian & Identitas</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -361,17 +366,22 @@
                                     <input type="text" id="inputPelapor" placeholder="Misal: Ust. Ahmad" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-accent outline-none transition bg-white/80 text-slate-800 font-bold shadow-inner">
                                 </div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div class="md:col-span-2">
-                                    <label class="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Nama Lengkap Siswa</label>
-                                    <input type="text" id="inputNama" placeholder="Ketik nama siswa..." required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-accent outline-none transition bg-white/80 text-slate-800 font-bold shadow-inner">
-                                </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 border-t border-slate-100 pt-5">
                                 <div>
-                                    <label class="block text-[11px] font-black uppercase tracking-wider text-slate-500 mb-2">Jenjang / Kelas</label>
+                                    <label class="block text-[11px] font-black uppercase tracking-wider text-brand-blue mb-2">1. Pilih Kelas</label>
                                     <div class="relative">
-                                        <select id="inputKelas" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-accent appearance-none outline-none transition bg-white/80 text-slate-800 font-bold shadow-inner cursor-pointer">
-                                            <option value="" disabled selected>Pilih...</option>
-                                            <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA</option>
+                                        <select id="inputKelas" required onchange="updateDropdownSiswa()" class="w-full px-4 py-3 rounded-xl border-2 border-blue-200 focus:ring-2 focus:border-brand-blue focus:ring-brand-accent appearance-none outline-none transition bg-white text-slate-800 font-black shadow-sm cursor-pointer">
+                                            <option value="" disabled selected>Memuat data...</option>
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-blue"><i class="ph ph-caret-down font-bold"></i></div>
+                                    </div>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-[11px] font-black uppercase tracking-wider text-brand-blue mb-2">2. Nama Lengkap Siswa</label>
+                                    <div class="relative">
+                                        <select id="inputNama" required disabled class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:ring-2 focus:border-brand-blue focus:ring-brand-accent appearance-none outline-none transition bg-slate-100 disabled:opacity-60 text-slate-800 font-bold shadow-sm cursor-pointer">
+                                            <option value="" disabled selected>Pilih kelas terlebih dahulu...</option>
                                         </select>
                                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400"><i class="ph ph-caret-down font-bold"></i></div>
                                     </div>
@@ -396,7 +406,7 @@
                                 </div>
 
                                 <div>
-                                    <label class="block text-[11px] font-black uppercase tracking-wider text-brand-blue mb-2">1. Kategori (Tingkat Keparahan)</label>
+                                    <label class="block text-[11px] font-black uppercase tracking-wider text-brand-blue mb-2">Kategori (Tingkat Keparahan)</label>
                                     <div class="relative">
                                         <select id="inputKategori" required onchange="updateDropdownPelanggaran()" class="w-full px-4 py-3.5 rounded-xl border-2 border-blue-200 focus:ring-4 focus:ring-blue-500/20 focus:border-brand-blue appearance-none outline-none transition bg-white text-slate-800 font-black cursor-pointer shadow-sm">
                                             <option value="" disabled selected>Pilih Kategori...</option>
@@ -410,7 +420,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label class="block text-[11px] font-black uppercase tracking-wider text-brand-blue mb-2">2. Rincian Pelanggaran Spesifik</label>
+                                    <label class="block text-[11px] font-black uppercase tracking-wider text-brand-blue mb-2">Rincian Pelanggaran Spesifik</label>
                                     <div class="relative" id="containerSelectJenis">
                                         <select id="inputJenisSelect" required disabled class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue appearance-none outline-none transition bg-slate-100 disabled:opacity-60 text-slate-700 font-bold shadow-inner">
                                             <option value="" disabled selected>Pilih Kategori di atas terlebih dahulu...</option>
@@ -779,18 +789,18 @@
 
         let masterPelanggaran = [];
         let dataKasus = [];
+        let dataSiswaGlobal = []; // Array to store master student data
         let myChart = null;
         let currentEditingId = null;
         let currentBase64ImageUpload = "";
 
         // ============================================================================
-        // API CONFIGURATION (GANTI DENGAN URL WEB APP KAMU)
+        // API CONFIGURATION 
         // ============================================================================
         const API_URL = 'https://script.google.com/macros/s/AKfycbwo9EyEWDTndod2E_E7GT1BH_IYBDPKp25j60hRgpuUtr0l0r_wh3EbEh4ZW5FWN-Jo/exec';
 
         /**
          * Helper Function untuk mengirim request Fetch ke API Google Apps Script.
-         * Menggunakan POST dengan body JSON string. GAS otomatis memproses Content-Type text/plain tanpa isu CORS.
          */
         async function fetchAPI(payload) {
             try {
@@ -818,7 +828,6 @@
             errorMsg.classList.add('opacity-0');
             user.classList.remove('border-red-400'); pass.classList.remove('border-red-400');
 
-            // Mengirim request login ke Backend API
             fetchAPI({ action: 'checkLogin', username: user.value, password: pass.value })
                 .then((response) => {
                     btn.innerHTML = 'Masuk Portal <i class="ph ph-sign-in text-lg"></i>';
@@ -836,7 +845,7 @@
                             document.getElementById('main-nav').classList.remove('pointer-events-none', 'opacity-50');
                             
                             document.getElementById('data-loader').classList.remove('hidden');
-                            fetchInitialDatabase(); // Tarik data setelah login
+                            fetchInitialDatabase(); // Fetch data after successful login
                             
                             showToast("Akses Diterima", "Selamat datang di sistem kedisiplinan.");
                         }, 500); 
@@ -852,25 +861,27 @@
                 .catch((error) => {
                     btn.innerHTML = 'Masuk Portal <i class="ph ph-sign-in text-lg"></i>';
                     btn.disabled = false;
-                    alert("Gagal koneksi ke server API. Pastikan internet aktif dan URL API benar.");
+                    showToast("Error Koneksi", "Gagal menghubungi server. Pastikan URL API benar.");
                 });
         }
 
         function fetchInitialDatabase() {
             fetchAPI({ action: 'getInitialData' })
                 .then((result) => {
-                    masterPelanggaran = result.masterPelanggaran;
-                    dataKasus = result.dataKasus;
+                    masterPelanggaran = result.masterPelanggaran || [];
+                    dataKasus = result.dataKasus || [];
+                    dataSiswaGlobal = result.dataSiswa || []; // Fetch student data
                     
                     document.getElementById('data-loader').classList.add('hidden');
                     
                     switchTab('dashboard'); 
                     updateBadge();
                     updateDropdownPelanggaran(); 
+                    populateDropdownKelas(); // Populate Class dropdown
                 })
                 .catch((error) => {
-                    alert("Gagal memuat database: " + error);
                     document.getElementById('data-loader').classList.add('hidden');
+                    showToast("Error Sinkronisasi", "Gagal memuat database: " + error);
                 });
         }
 
@@ -939,7 +950,9 @@
             }
 
             const counts = { 'Ringan':0, 'Sedang':0, 'Berat':0, 'Sangat Berat':0 };
-            dataKasus.forEach(k => counts[k.kategori]++);
+            dataKasus.forEach(k => {
+                if (counts[k.kategori] !== undefined) counts[k.kategori]++;
+            });
             const ctx = document.getElementById('categoryChart').getContext('2d');
             if(myChart) myChart.destroy();
             myChart = new Chart(ctx, {
@@ -947,6 +960,41 @@
                 data: { labels: ['Ringan', 'Sedang', 'Berat', '5 Malapetaka'], datasets: [{ data: [counts['Ringan'], counts['Sedang'], counts['Berat'], counts['Sangat Berat']], backgroundColor: ['#3b82f6', '#eab308', '#f97316', '#e11d48'], borderWidth: 0, hoverOffset: 10 }] },
                 options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20, font: { family: "'Plus Jakarta Sans'", weight: 'bold', size: 10 } } } } }
             });
+        }
+
+        function populateDropdownKelas() {
+            const selectKelas = document.getElementById('inputKelas');
+            selectKelas.innerHTML = '<option value="" disabled selected>Pilih Kelas...</option>';
+            
+            if(dataSiswaGlobal.length > 0) {
+                const uniqueKelas = [...new Set(dataSiswaGlobal.map(item => item.kelas))].sort();
+                uniqueKelas.forEach(kelas => {
+                    selectKelas.innerHTML += `<option value="${kelas}">${kelas}</option>`;
+                });
+            } else {
+                selectKelas.innerHTML = '<option value="" disabled selected>Data Kelas Kosong</option>';
+            }
+        }
+
+        function updateDropdownSiswa() {
+            const selectedKelas = document.getElementById('inputKelas').value;
+            const selectNama = document.getElementById('inputNama');
+            
+            selectNama.innerHTML = '<option value="" disabled selected>Pilih Nama Siswa...</option>';
+            
+            if(selectedKelas) {
+                selectNama.disabled = false;
+                selectNama.classList.remove('bg-slate-100', 'opacity-60');
+                
+                const filterSiswa = dataSiswaGlobal.filter(item => item.kelas === selectedKelas).sort((a, b) => a.nama.localeCompare(b.nama));
+                
+                filterSiswa.forEach(siswa => {
+                    selectNama.innerHTML += `<option value="${siswa.nama}">${siswa.nama}</option>`;
+                });
+            } else {
+                selectNama.disabled = true;
+                selectNama.classList.add('bg-slate-100', 'opacity-60');
+            }
         }
 
         function toggleTipePelanggaran() {
@@ -1024,8 +1072,8 @@
             const newData = {
                 id: newId, 
                 tanggal: document.getElementById('inputTanggal').value,
-                nama: document.getElementById('inputNama').value, 
-                kelas: document.getElementById('inputKelas').value,
+                nama: document.getElementById('inputNama').value, // Mengambil value dari Dropdown Nama
+                kelas: document.getElementById('inputKelas').value, // Mengambil value dari Dropdown Kelas
                 tipe: isCustom ? 'custom' : 'standard',
                 kategori: document.getElementById('inputKategori').value, 
                 jenis: jenisPelanggaran,
@@ -1058,9 +1106,16 @@
                         form.reset();
                         document.getElementById('radioStandard').checked = true;
                         toggleTipePelanggaran();
+                        
+                        // Reset Dropdowns
                         document.getElementById('inputJenisSelect').disabled = true;
                         document.getElementById('inputJenisSelect').innerHTML = '<option value="" disabled selected>Pilih Kategori Terlebih Dahulu...</option>';
                         document.getElementById('inputJenisSelect').classList.add('bg-slate-100', 'opacity-60');
+                        
+                        document.getElementById('inputNama').disabled = true;
+                        document.getElementById('inputNama').innerHTML = '<option value="" disabled selected>Pilih kelas terlebih dahulu...</option>';
+                        document.getElementById('inputNama').classList.add('bg-slate-100', 'opacity-60');
+                        
                         removePreviewImage();
                     } else {
                         showToast("Gagal Disimpan", res.message);
@@ -1069,7 +1124,7 @@
                 .catch((err) => {
                     btnSave.disabled = false; btnSavePdf.disabled = false;
                     btnSave.innerText = "Simpan (Antrean BK)";
-                    alert("Gagal koneksi ke server saat menyimpan.");
+                    showToast("Error", "Gagal koneksi ke server saat menyimpan.");
                 });
         }
 
@@ -1187,7 +1242,7 @@
                 .catch((err) => {
                     btnSave.disabled = false; btnPdf.disabled = false;
                     btnSave.innerText = "Simpan Progress";
-                    alert("Gagal koneksi server saat update.");
+                    showToast("Error", "Gagal koneksi server saat update.");
                 });
         }
 
@@ -1218,7 +1273,7 @@
                         closeModal(); renderProsesKasus(); updateBadge();
                     }
                 })
-                .catch((err)=>{ btnPdf.disabled=false; alert("Gagal koneksi"); });
+                .catch((err)=>{ btnPdf.disabled=false; showToast("Error", "Gagal koneksi"); });
         }
 
         function processBAP(data) {
@@ -1288,7 +1343,9 @@
             document.getElementById('resKelasSiswa').innerText = history[0].kelas;
 
             let c = { 'Ringan':0, 'Sedang':0, 'Berat':0, 'Sangat Berat':0 };
-            history.forEach(k => c[k.kategori]++);
+            history.forEach(k => {
+                if (c[k.kategori] !== undefined) c[k.kategori]++;
+            });
             document.getElementById('count-ringan').innerText = c['Ringan'];
             document.getElementById('count-sedang').innerText = c['Sedang'];
             document.getElementById('count-berat').innerText = c['Berat'];
